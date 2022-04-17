@@ -16,9 +16,16 @@ public class User implements Cloneable {
 	public String toString() {
 		return "User [name=" + name + ", age=" + age + ", address=" + address + "]";
 	}
-	
+
+
 	@Override
-	public User clone() throws CloneNotSupportedException {
-		return (User) super.clone();
+	public User clone() {
+		try {
+			User cloneUser = (User) super.clone();
+			cloneUser.address = (Address) address.clone();
+			return cloneUser;
+		} catch (CloneNotSupportedException e) {
+			throw new AssertionError();
+		}
 	}
 }
